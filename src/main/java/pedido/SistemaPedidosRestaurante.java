@@ -31,34 +31,25 @@ public class SistemaPedidosRestaurante {
 					break;
 				case 0:
 					System.out.println("Saindo do sistema...");
-					break;
+					return;
 				default:
 					System.out.println("Opção inválida! Tente novamente.");
 			}
-		} while (opcao != 0);
-	}
-	private static boolean continuarExibindoMenu;
-
-	private static void setContinuarExibindoMenu(boolean continuar) {
-		continuarExibindoMenu = continuar;
-	}
-
-	private static boolean isContinuarExibindoMenu() {
-		return continuarExibindoMenu;
+		} while (true);
 	}
 
 	private static void exibirMenuInicial() {
-		System.out.println("\n=== ESCOLHA ===");
-		System.out.println("1. Adicionar mesa");
-		System.out.println("2. Remover mesa");
-		System.out.println("0. Sair");
-		System.out.print("Escolha uma opção: ");
-		setContinuarExibindoMenu(true); // Definir para continuar exibindo o menu
+		System.out.print("\n=== ESCOLHA ===\n" +
+		"1. Adicionar mesa\n" +
+		"2. Remover mesa\n" +
+		"0. Sair\n" +
+		"Escolha uma opção: ");
+		return;
 	}
 
 	private static void adicionarMesa() {
-		System.out.println("\n=== ADICIONAR MESA ===");
-		System.out.print("Digite o número da mesa: ");
+		System.out.print("\n=== ADICIONAR MESA ===\n" +
+		"Digite o número da mesa: ");
 		int numeroMesa = scanner.nextInt();
 		scanner.nextLine(); // Limpar o buffer do scanner
 
@@ -73,8 +64,8 @@ public class SistemaPedidosRestaurante {
 	}
 
 	private static void removerMesa() {
-		System.out.println("\n=== REMOVER MESA ===");
-		System.out.print("Digite o número da mesa a ser removida: ");
+		System.out.print("\n=== REMOVER MESA ===\n" +
+		"Digite o número da mesa a ser removida: ");
 		int numeroMesa = scanner.nextInt();
 		scanner.nextLine(); // Limpar o buffer do scanner
 
@@ -89,15 +80,14 @@ public class SistemaPedidosRestaurante {
 
 	private static void exibirMenuPrincipal(int numeroMesa) {
 		int opcao;
-		setContinuarExibindoMenu(true); // Definir para continuar exibindo o menu
 
-		while (isContinuarExibindoMenu()) { // Usar o método isContinuarExibindoMenu
-			System.out.println("\n=== MENU PRINCIPAL - MESA " + numeroMesa + " ===");
-			System.out.println("1. Adicionar pedido");
-			System.out.println("2. Remover pedido");
-			System.out.println("3. Entregar pedidos à cozinha");
-			System.out.println("0. Voltar ao menu inicial");
-			System.out.print("Escolha uma opção: ");
+		while (true) {
+			System.out.print("\n=== MENU PRINCIPAL - MESA " + numeroMesa + " ===\n" +
+			"1. Adicionar pedido\n" +
+			"2. Remover pedido\n" +
+			"3. Entregar pedidos à cozinha\n" +
+			"0. Voltar ao menu inicial\n" +
+			"Escolha uma opção: ");
 			opcao = scanner.nextInt();
 			scanner.nextLine(); // Limpar o buffer do scanner
 
@@ -109,19 +99,12 @@ public class SistemaPedidosRestaurante {
 					removerPedido(numeroMesa);
 					break;
 				case 3:
-					setContinuarExibindoMenu(false); // Definir para não continuar exibindo o menu
 					entregarPedidos(numeroMesa);
-					break;
+					return;
 				case 0:
-					setContinuarExibindoMenu(false); // Definir para não continuar exibindo o menu
-					exibirMenuInicial();
-					break;
+					return;
 				default:
 					System.out.println("Opção inválida! Tente novamente.");
-			}
-
-			if (opcao == 0 || opcao == 3) {
-				setContinuarExibindoMenu(false); // Definir para não continuar exibindo o menu
 			}
 		}
 	}
@@ -132,13 +115,13 @@ public class SistemaPedidosRestaurante {
 
 		Scanner scanner = new Scanner(System.in);
 
-		System.out.println("Escolha o item:");
-		System.out.println("1. Pizza - R$14.00");
-		System.out.println("2. Salada - R$20.00");
-		System.out.println("3. Hamburguer - R$40.00");
-		System.out.println("4. Baby Beef - R$120.00");
-		System.out.println("5. Bauru - R$37.00");
-		System.out.print("Escolha uma opção: ");
+		System.out.print("Escolha o item:\n" +
+		"1. Pizza - R$14.00\n" +
+		"2. Salada - R$20.00\n" +
+		"3. Hamburguer - R$40.00\n" +
+		"4. Baby Beef - R$120.00\n" +
+		"5. Bauru - R$37.00\n" +
+		"Escolha uma opção: ");
 		int escolha = scanner.nextInt();
 		scanner.nextLine(); // Limpar o buffer do scanner
 
@@ -161,7 +144,6 @@ public class SistemaPedidosRestaurante {
 				break;
 			default:
 				System.out.println("Opção inválida!");
-				scanner.nextLine();
 				return;
 		}
 
@@ -180,9 +162,6 @@ public class SistemaPedidosRestaurante {
 		pedidosPorMesa.put(numeroMesa, pedidos);
 
 		System.out.println("Pedido adicionado com sucesso!");
-
-		// Voltar ao menu principal da mesa
-		exibirMenuPrincipal(numeroMesa);
 	}
 
 	private static void removerPedido(int numeroMesa) {
@@ -220,7 +199,6 @@ public class SistemaPedidosRestaurante {
 		// Voltar ao menu principal da mesa
 		exibirMenuPrincipal(numeroMesa);
 	}
-
 
 	private static void entregarPedidos(int numeroMesa) {
 		System.out.println("\n=== ENTREGAR PEDIDOS À COZINHA ===");
