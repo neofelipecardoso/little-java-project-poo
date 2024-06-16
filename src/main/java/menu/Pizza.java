@@ -1,13 +1,14 @@
 package menu;
 
+import java.math.BigDecimal;
+
 import pedido.Pedido;
 
 public class Pizza implements Pedido {
-	private String descricao;
-	private double custo;
+	private String descricao = "Pizza";
+	private BigDecimal custo;
 
-	public Pizza(String descricao, double custo) {
-		this.descricao = descricao;
+	public Pizza(BigDecimal custo) {
 		this.custo = custo;
 	}
 
@@ -15,7 +16,7 @@ public class Pizza implements Pedido {
 		return descricao;
 	}
 
-	public double getCusto() {
+	public BigDecimal getCusto() {
 		return custo;
 	}
 }

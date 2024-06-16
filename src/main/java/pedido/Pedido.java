@@ -1,6 +1,8 @@
 package pedido;
 
+import java.math.BigDecimal;
+
 public interface Pedido {
 	public String getDescricao();
-	public double getCusto();
+	public BigDecimal getCusto();
 }

@@ -1,10 +1,12 @@
 package pedido;
 
+import java.math.BigDecimal;
+
 public class DetalheExtra extends Detalhe {
 	private String descricaoExtra;
-	private double custoExtra;
+	private BigDecimal custoExtra;
 
-	public DetalheExtra(Pedido pedido, String descricaoExtra, double custoExtra) {
+	public DetalheExtra(Pedido pedido, String descricaoExtra, BigDecimal custoExtra) {
 		super(pedido);
 		this.descricaoExtra = descricaoExtra;
 		this.custoExtra = custoExtra;
@@ -14,7 +16,7 @@ public class DetalheExtra extends Detalhe {
 		return pedido.getDescricao() + ", " + descricaoExtra;
 	}
 
-	public double getCusto() {
-		return pedido.getCusto() + custoExtra;
+	public BigDecimal getCusto() {
+		return pedido.getCusto().add(custoExtra);
 	}
 }
