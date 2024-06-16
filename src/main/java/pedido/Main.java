@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Scanner;
 import java.util.Map;
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.ArrayList;
 
 import menu.*;
@@ -196,7 +197,7 @@ public class Main {
 			String personalizacao = scanner.nextLine();
 			
 			System.out.print("Digite o valor adicional da personalização: ");
-			BigDecimal valorAdicional = scanner.nextBigDecimal();
+			BigDecimal valorAdicional = scanner.nextBigDecimal().setScale(2, RoundingMode.DOWN);
 			scanner.nextLine(); // Limpar o buffer do scanner
 			
 			pedido = new DetalheExtra(pedido, personalizacao, valorAdicional);
@@ -253,7 +254,7 @@ public class Main {
 
 		for (Pedido pedido : pedidos) {
 			System.out.println("- " + pedido.getDescricao());
-			System.out.printf("   %s %.2f%n", "R$", pedido.getCusto());
+			System.out.printf("   %s %s%n", "R$", pedido.getCusto());
 		}
 	}
 
