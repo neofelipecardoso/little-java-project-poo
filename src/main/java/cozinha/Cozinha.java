@@ -16,6 +16,7 @@ public class Cozinha {
 	public void receberPedidos(int numeroMesa, List<Pedido> pedidos) {
 		pedidosPorMesa.put(numeroMesa, pedidos);
 		organizarPedidos();
+		prepararPedidos();
 	}
 
 	private void organizarPedidos() {

@@ -1,13 +1,14 @@
 package menu;
 
+import java.math.BigDecimal;
+
 import pedido.Pedido;
 
 public class BabyBeef implements Pedido {
-	private String descricao;
-	private double custo;
+	private String descricao = "Baby Beef";
+	private BigDecimal custo;
 
-	public BabyBeef(String descricao, double custo) {
-		this.descricao = descricao;
+	public BabyBeef(BigDecimal custo) {
 		this.custo = custo;
 	}
 
@@ -15,7 +16,7 @@ public class BabyBeef implements Pedido {
 		return descricao;
 	}
 
-	public double getCusto() {
+	public BigDecimal getCusto() {
 		return custo;
 	}
 }

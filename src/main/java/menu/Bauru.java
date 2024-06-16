@@ -1,21 +1,22 @@
 package menu;
 
+import java.math.BigDecimal;
+
 import pedido.Pedido;
 
 public class Bauru implements Pedido {
-	private String descricao;
-	private double custo;
+	private String descricao = "Bauru";
+	private BigDecimal custo;
 
-	public Bauru(String descricao, double custo) {
-		this.descricao = descricao;
+	public Bauru(BigDecimal custo) {
 		this.custo = custo;
 	}
-
+	
 	public String getDescricao() {
 		return descricao;
 	}
 
-	public double getCusto() {
+	public BigDecimal getCusto() {
 		return custo;
 	}
 }
