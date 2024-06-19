@@ -21,7 +21,12 @@ public class Main {
 		int opcao;
 		while (true) {
 			try {
-				exibirMenuInicial();
+				System.out.print("\n=== ESCOLHA ===\n" +
+								 "1. Adicionar ou escolher mesa\n" +
+								 "2. Remover mesa\n" +
+								 "3. Exibir mesas\n" +
+								 "0. Sair\n" +
+								 "Escolha uma opção: ");
 				opcao = scanner.nextInt();
 				scanner.nextLine(); // Limpar o buffer do scanner
 	
@@ -42,20 +47,11 @@ public class Main {
 						System.out.println("Opção inválida! Tente novamente.");
 				}
 			} catch (Exception e) {
-				System.out.println("\nOcorreu um erro: " + e.getClass().getSimpleName());
+				System.out.println("\nOcorreu um erro:");
+				e.printStackTrace();
 				scanner.nextLine(); // Limpar o buffer do scanner
 			}
 		}
-	}
-
-	private static void exibirMenuInicial() {
-		System.out.print("\n=== ESCOLHA ===\n" +
-						 "1. Adicionar ou escolher mesa\n" +
-						 "2. Remover mesa\n" +
-						 "3. Exibir mesas\n" +
-						 "0. Sair\n" +
-						 "Escolha uma opção: ");
-		return;
 	}
 
 	private static void adicionarMesa() {
@@ -155,15 +151,13 @@ public class Main {
 		System.out.println("\n=== ADICIONAR PEDIDO ===");
 		List<Pedido> pedidos = pedidosPorMesa.getOrDefault(numeroMesa, new ArrayList<Pedido>());
 		
-		System.out.print(
-			"Produto         Preço\n" + 
-			"1. Pizza        R$  14.00\n" +
-			"2. Salada       R$  20.00\n" +
-			"3. Hamburguer   R$  40.00\n" +
-			"4. Baby Beef    R$ 120.00\n" +
-			"5. Bauru        R$  37.00\n" +
-			"Escolha uma opção: "
-		);
+		System.out.print("Produto         Preço\n" + 
+						 "1. Pizza        R$  14.00\n" +
+						 "2. Salada       R$  20.00\n" +
+						 "3. Hamburguer   R$  40.00\n" +
+						 "4. Baby Beef    R$ 120.00\n" +
+						 "5. Bauru        R$  37.00\n" +
+						 "Escolha uma opção: ");
 		int escolha = scanner.nextInt();
 		scanner.nextLine(); // Limpar o buffer do scanner
 
@@ -252,10 +246,15 @@ public class Main {
 			return;
 		}
 
+		BigDecimal total = BigDecimal.valueOf(0.00);
+
 		for (Pedido pedido : pedidos) {
 			System.out.println("- " + pedido.getDescricao());
-			System.out.printf("   %s %s%n", "R$", pedido.getCusto());
+			System.out.println(String.format("   R$ %.2f", pedido.getCusto()));
+			total = total.add(pedido.getCusto());
 		}
+
+		System.out.println(String.format("\nTotal: R$ %.2f", total));
 	}
 
 	private static void entregarPedidos(int numeroMesa) {
@@ -264,6 +263,24 @@ public class Main {
 
 		if (pedidos.isEmpty()) {
 			System.out.println("Nenhum pedido para entregar!");
+			return;
+		}
+
+		BigDecimal total = BigDecimal.valueOf(0.00);
+		
+		for (Pedido pedido : pedidos) {
+			System.out.println("- " + pedido.getDescricao());
+			System.out.println(String.format("   R$ %.2f", pedido.getCusto()));
+			total = total.add(pedido.getCusto());
+		}
+
+		System.out.println(String.format("\nTotal: R$ %.2f", total));
+
+		System.out.print("\nDeseja entregar os pedidos? (s/N): ");
+		String resposta = scanner.nextLine();
+
+		if(!resposta.equalsIgnoreCase("S")) {
+			System.out.println("Operação cancelada!");
 			return;
 		}
 
