@@ -1,3 +1,7 @@
 # little-java-project-poo
 
-Just a simple restaurant menu system.
+Integrantes:
+Felipe Rodrigo
+Beatriz Pena
+Fabio Lutz
+Felipe Campos
